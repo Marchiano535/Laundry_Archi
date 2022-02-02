@@ -75,18 +75,19 @@ class OutletController extends Controller
         //
     }
 
-    /**
+   /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateOutletRequest  $request
      * @param  \App\Models\Outlet  $outlet
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOutletRequest $request, Outlet $outlet)
+    public function update(Request $request, $id)
     {
-        //
+        outlet::find($id)->update($request->all());
+        return redirect('outlet')->with('success', 'Data Produk Berhasil Diubah!');  //
+    
     }
-
     /**
      * Remove the specified resource from storage.
      *
