@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Outlet;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
+use Illuminate\Http\Request;
 
 class OutletController extends Controller
 {
@@ -15,7 +16,9 @@ class OutletController extends Controller
      */
     public function index()
     {
-        //
+        $data['outlet'] = Outlet::all(); 
+        return view('outlet/index', $data
+        );
     }
 
     /**
@@ -34,9 +37,20 @@ class OutletController extends Controller
      * @param  \App\Http\Requests\StoreOutletRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOutletRequest $request)
+    public function store(Request $request)
     {
-        //
+        
+        $validated = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tlp' => 'required'
+        ]);
+
+        $input = Outlet::create($validated);
+
+        if ($input->save()) {
+             return redirect('outlet')->with('succes', 'data berhasil di input');
+        }
     }
 
     /**

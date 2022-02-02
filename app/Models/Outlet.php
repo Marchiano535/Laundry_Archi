@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Outlet extends Model
 {
     use HasFactory;
+
+    
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $table = 'outlet';
+    protected $fillable =[
+        'nama',
+        'alamat',
+        'tlp'
+    ];
 }

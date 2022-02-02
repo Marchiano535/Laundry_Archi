@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="card-body">
-          Start creating your amazing application!
+          <a href="#">text in here</a>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

@@ -103,9 +103,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{asset('assets')}}/index.html" class="nav-link">
+                <a href="{{url('outlet')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Outlet</p>
                 </a>
               </li>
               <li class="nav-item">
