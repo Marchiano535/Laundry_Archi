@@ -93,8 +93,9 @@ class OutletController extends Controller
      * @param  \App\Models\Outlet  $outlet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Outlet $outlet)
+    public function destroy($id)
     {
-        //
+        outlet::find($id)->delete();
+        return redirect('outlet')->with('success', 'Product Has Been Deleted');
     }
 }
