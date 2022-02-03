@@ -84,7 +84,7 @@ class OutletController extends Controller
      */
     public function update(Request $request, $id)
     {
-        outlet::find($id)->update($request->all());
+        Outlet::find($id)->update($request->all());
         return redirect('outlet')->with('success', 'Data Produk Berhasil Diubah!');  //
     
     }
@@ -96,7 +96,8 @@ class OutletController extends Controller
      */
     public function destroy($id)
     {
-        outlet::find($id)->delete();
-        return redirect('outlet')->with('success', 'Product Has Been Deleted');
+        Outlet::find($id)->delete();
+
+      return redirect('outlet')->with('success','Cabang Deleted');
     }
 }

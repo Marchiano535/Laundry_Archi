@@ -15,7 +15,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $data['member'] = Member::all(); 
+        return view('member/index',$data );
     }
 
     /**
@@ -25,7 +26,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+         //
     }
 
     /**
@@ -36,7 +37,18 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'tlp' => 'required'
+        ]);
+
+        $input = Member::create($validated);
+
+        if ($input->save()) {
+             return redirect('member')->with('success', 'data berhasil di input');
+        }
     }
 
     /**
@@ -61,16 +73,28 @@ class MemberController extends Controller
         //
     }
 
-    /**
+  /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateMemberRequest  $request
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMemberRequest $request, Member $member)
+    public function update(UpdatememberRequest $request, member $member)
     {
-        //
+        $validatedData = $request->validate([
+
+            'nama' => 'required',
+            'alamat' => 'required',
+            'jenis_kelamin' => 'required',
+            'tlp' => 'required',
+
+        ]);
+
+        Member::where('id', $member->id)
+            ->update($validatedData);
+
+            return redirect('member')->with('succes'.'Data Has Been Updated!');
     }
 
     /**
@@ -79,8 +103,10 @@ class MemberController extends Controller
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        //
+    Member::find($id)->delete();
+
+        return redirect('member')->with('success','Cabang Deleted');
     }
 }
