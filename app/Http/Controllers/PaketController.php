@@ -85,7 +85,19 @@ class PaketController extends Controller
      */
     public function update(UpdatePaketRequest $request, Paket $paket)
     {
-        //
+        $validatedData = $request->validate([
+
+            'id_outlet' => 'required',
+            'jenis' => 'required',
+            'nama_paket' => 'required',
+            'harga' => 'required',
+
+        ]);
+
+        Paket::where('id', $paket->id)
+            ->update($validatedData);
+
+            return redirect('paket')->with('succes'.'Data Has Been Updated!');
     }
 
     /**
@@ -94,8 +106,12 @@ class PaketController extends Controller
      * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paket $paket)
+    public function destroy($id)
     {
-        //
+        {
+            Paket::find($id)->delete();
+    
+          return redirect('paket')->with('success','Cabang Deleted');
+        }
     }
 }
