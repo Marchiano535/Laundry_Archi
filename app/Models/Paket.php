@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Paket extends Model
 {
     use HasFactory;
+    
+    protected $primaryKey = 'id';
+
+    public $incrementing = true;
+    
+    protected $table = 'paket';
+
+    protected $fillable =[
+        'id_outlet',
+        'jenis',
+        'nama_paket',
+        'harga'
+    ];
 }
+

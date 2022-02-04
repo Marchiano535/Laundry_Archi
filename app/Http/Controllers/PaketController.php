@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paket;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
+use App\Models\Outlet;
 
 class PaketController extends Controller
 {
@@ -15,7 +16,10 @@ class PaketController extends Controller
      */
     public function index()
     {
-        //
+        $data['paket'] = Paket::all();
+        $data['outlet'] = Outlet::all(); 
+        return view('paket/index', $data);
+
     }
 
     /**
@@ -25,7 +29,7 @@ class PaketController extends Controller
      */
     public function create()
     {
-        //
+ 
     }
 
     /**
@@ -36,7 +40,18 @@ class PaketController extends Controller
      */
     public function store(StorePaketRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'id_outlet' => 'required',
+            'jenis' => 'required',
+            'nama_paket' => 'required',
+            'harga' => 'required'
+        ]);
+
+        $input = Paket::create($validated);
+
+        if ($input->save()) {
+             return redirect('paket')->with('success', 'data berhasil di input');
+        }
     }
 
     /**
