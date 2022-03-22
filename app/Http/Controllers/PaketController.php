@@ -6,6 +6,9 @@ use App\Models\Paket;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
 use App\Models\Outlet;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PaketExport;
+use App\Imports\PaketImport;
 
 class PaketController extends Controller
 {
@@ -111,7 +114,19 @@ class PaketController extends Controller
         {
             Paket::find($id)->delete();
     
-          return redirect('paket')->with('success','Cabang Deleted');
+          return redirect()->back()->with('success','Cabang Deleted');
         }
     }
+    
+    public function exportData(){
+        $date = date('Y-m-d');
+        return Excel::download(new PaketExport, $date.'_paket.xlsx');
+    }
+
+    public function importData(){
+        Excel::import(new PaketImport, request()->file('import'));
+
+        return redirect('/paket')->with('success', 'Import data paket berhasil!');
+    }
 }
+

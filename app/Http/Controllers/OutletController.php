@@ -85,7 +85,7 @@ class OutletController extends Controller
     public function update(Request $request, $id)
     {
         Outlet::find($id)->update($request->all());
-        return redirect('outlet')->with('success', 'Data Produk Berhasil Diubah!');  //
+        return redirect()->back()->with('success', 'Data Produk Berhasil Diubah!');  //
     
     }
     /**

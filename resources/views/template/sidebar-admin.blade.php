@@ -43,7 +43,22 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Transaksi
-                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('a/simulasi')}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Simulasi
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('a/penjemputan')}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                penjemputan
               </p>
             </a>
           </li>

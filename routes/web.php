@@ -6,8 +6,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OutletController; 
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PenjemputanController;
 use App\Http\Controllers\SimulasiController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', [HomeController::class,'index']);
@@ -16,8 +18,7 @@ use Illuminate\Support\Facades\Route;
 // route::resource('paket',PaketController::class);
 // Route::resource('barang',BarangInventarisController::class);
 // Route::resource('transaksi', TransaksiController::class);
-// Route::resource('simulasi', SimulasiController::class);
-
+Route::resource('test', TestController::class);
 Route::middleware(['auth'])->group( function(){
     Route::get('home', [HomeController::class, 'index']);
 });
@@ -32,8 +33,15 @@ Route::group(['prefix'=>'a','middleware'=>['isAdmin','auth']], function(){
     Route::resource('outlet',OutletController::class);
     Route::resource('member',MemberController::class);
     Route::resource('paket',PaketController::class);
+    Route::get('export/paket', [PaketController::class, 'exportData'])->name('export-paket');
+    Route::post('paket/import', [PaketController::class, 'importData'])->name('import-paket');
+    Route::get('simulasi', [SimulasiController::class, 'index']);
+    Route::resource('penjemputan', PenjemputanController::class);
+    Route::get('export/penjemputan', [PenjemputanController::class, 'exportData'])->name('export-penjemputan');
+    Route::post('penjemputan/import', [PenjemputanController::class, 'importData'])->name('import-penjemputan');
     Route::get('transaksi', [TransaksiController::class, 'index']);
     Route::get('laporan', [LaporanController::class, 'index']);
+    
 });
 Route::group(['prefix'=>'k','middleware'=>['isKasir','auth']], function(){
     Route::get('home', [HomeController::class,'index'])->name('k.home');

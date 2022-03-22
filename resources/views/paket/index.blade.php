@@ -12,6 +12,13 @@
     </div>
     <div class="card-body">
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#formInputModal">Tambah data</button>
+
+        <a href="{{ route('export-paket') }}" class="btn btn-success">
+        <i class="fa fa-file-excel"></i> Export
+    </a>
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
+        <i class="fas fa-file-excel"></i> Import
+    </button>
     </div>
     </div>
     <div style="margin-top:20px">
